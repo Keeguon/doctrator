@@ -21,9 +21,8 @@
 
 namespace Doctrator\Behavior;
 
-use Mondongo\Mondator\ClassExtension;
-use Mondongo\Mondator\Definition\Method;
-use Mondongo\Inflector;
+use Mandango\Mondator\ClassExtension;
+use Mandango\Mondator\Definition\Method;
 
 /**
  * The doctrator Ipable behavior.
@@ -40,9 +39,9 @@ class Ipable extends ClassExtension
     {
         $this->addOptions(array(
             'created_enabled' => true,
-            'created_column'  => 'created_from',
+            'created_column'  => 'createdFrom',
             'updated_enabled' => true,
-            'updated_column'  => 'updated_from',
+            'updated_column'  => 'updatedFrom',
             'get_ip_callable' => array('\Doctrator\Behavior\Ipable', 'getIp'),
         ));
     }
@@ -82,7 +81,7 @@ class Ipable extends ClassExtension
             $column = $this->getOption('created_column');
 
             // event
-            $columnSetter  = 'set'.Inflector::camelize($column);
+            $columnSetter  = 'set'.ucfirst($column);
             $getIpCallable = $this->getIpCallableAsString();
 
             $method = new Method('public', 'updateIpableCreated', '', <<<EOF
@@ -101,7 +100,7 @@ EOF
             $column = $this->getOption('updated_column');
 
             // event
-            $columnSetter  = 'set'.Inflector::camelize($column);
+            $columnSetter  = 'set'.ucfirst($column);
             $getIpCallable = $this->getIpCallableAsString();
 
             $method = new Method('public', 'updateIpableUpdated', '', <<<EOF

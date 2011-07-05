@@ -21,10 +21,9 @@
 
 namespace Doctrator\Extension;
 
-use Mondongo\Mondator\Extension;
-use Mondongo\Mondator\Definition\Method;
-use Mondongo\Mondator\Definition\Property;
-use Mondongo\Inflector;
+use Mandango\Mondator\Extension;
+use Mandango\Mondator\Definition\Method;
+use Mandango\Mondator\Definition\Property;
 
 /**
  * The doctrator ActiveRecord extension.
@@ -66,7 +65,7 @@ class ActiveRecord extends Extension
         return \Doctrator\EntityManagerContainer::getEntityManager();
 EOF
         );
-        $method->setIsStatic(true);
+        $method->setStatic(true);
         $method->setDocComment(<<<EOF
     /**
      * Returns the entity manager.
@@ -122,7 +121,7 @@ EOF
         return static::entityManager()->getRepository('{$this->class}');
 EOF
         );
-        $method->setIsStatic(true);
+        $method->setStatic(true);
         $method->setDocComment(<<<EOF
     /**
      * Returns the repository.
@@ -144,7 +143,7 @@ EOF
         return static::repository()->createQueryBuilder(\$alias);
 EOF
         );
-        $method->setIsStatic(true);
+        $method->setStatic(true);
         $method->setDocComment(<<<EOF
     /**
      * Create a query builder for this entity name.

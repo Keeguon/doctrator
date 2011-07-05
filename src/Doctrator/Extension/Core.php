@@ -21,13 +21,13 @@
 
 namespace Doctrator\Extension;
 
-use Mondongo\Mondator\Extension;
-use Mondongo\Mondator\Definition;
-use Mondongo\Mondator\Definition\Method;
-use Mondongo\Mondator\Definition\Property;
-use Mondongo\Mondator\Output;
-use Mondongo\Mondator\Dumper;
-use Mondongo\Inflector;
+use Mandango\Mondator\Extension;
+use Mandango\Mondator\Definition;
+use Mandango\Mondator\Definition\Method;
+use Mandango\Mondator\Definition\Property;
+use Mandango\Mondator\Output;
+use Mandango\Mondator\Dumper;
+use Doctrator\Inflector;
 
 /**
  * The doctrator Core extension.
@@ -185,7 +185,7 @@ EOF
 
         // entity_base
         $this->definitions['entity_base'] = $definition = new Definition($classes['entity_base'], new Output($dir.'/Base', true));
-        $definition->setIsAbstract(true);
+        $definition->setAbstract(true);
         $definition->setDocComment(<<<EOF
 /**
  * Base class of the {$this->class} entity.
@@ -205,7 +205,7 @@ EOF
 
         // repository_base
         $this->definitions['repository_base'] = $definition = new Definition($classes['repository_base'], new Output($dir.'/Base', true));
-        $definition->setIsAbstract(true);
+        $definition->setAbstract(true);
         $definition->setParentClass('\\Doctrine\\ORM\\EntityRepository');
         $definition->setDocComment(<<<EOF
 /**
@@ -367,7 +367,7 @@ EOF;
     {
         foreach ($this->configClass['columns'] as $name => $column) {
             // setter
-            $method = new Method('public', 'set'.Inflector::camelize($name), '$value', <<<EOF
+            $method = new Method('public', 'set'.ucfirst($name), '$value', <<<EOF
         \$this->$name = \$value;
 EOF
             );
@@ -382,7 +382,7 @@ EOF
             $this->definitions['entity_base']->addMethod($method);
 
             // getter
-            $method = new Method('public', 'get'.Inflector::camelize($name), '', <<<EOF
+            $method = new Method('public', 'get'.ucfirst($name), '', <<<EOF
         return \$this->$name;
 EOF
             );
@@ -511,7 +511,7 @@ EOF;
     {
         foreach ($this->mergeAssociations() as $name => $association) {
             // setter
-            $method = new Method('public', 'set'.Inflector::camelize($name), '$value', <<<EOF
+            $method = new Method('public', 'set'.ucfirst($name), '$value', <<<EOF
         \$this->$name = \$value;
 EOF
             );
@@ -526,7 +526,7 @@ EOF
             $this->definitions['entity_base']->addMethod($method);
 
             // getter
-            $method = new Method('public', 'get'.Inflector::camelize($name), '', <<<EOF
+            $method = new Method('public', 'get'.ucfirst($name), '', <<<EOF
         return \$this->$name;
 EOF
             );
@@ -550,7 +550,7 @@ EOF
         $code = '';
         // columns
         foreach ($this->configClass['columns'] as $name => $column) {
-            $setter = 'set'.Inflector::camelize($name);
+            $setter = 'set'.ucfirst($name);
             $code .= <<<EOF
         if ('$name' == \$name) {
             return \$this->$setter(\$value);
@@ -560,7 +560,7 @@ EOF;
         }
         // associations
         foreach ($this->mergeAssociations() as $name => $association) {
-            $setter = 'set'.Inflector::camelize($name);
+            $setter = 'set'.ucfirst($name);
             $code .= <<<EOF
         if ('$name' == \$name) {
             return \$this->$setter(\$value);
@@ -598,7 +598,7 @@ EOF
         $code = '';
         // columns
         foreach ($this->configClass['columns'] as $name => $column) {
-            $getter = 'get'.Inflector::camelize($name);
+            $getter = 'get'.ucfirst($name);
             $code .= <<<EOF
         if ('$name' == \$name) {
             return \$this->$getter();
@@ -608,7 +608,7 @@ EOF;
         }
         // associations
         foreach ($this->mergeAssociations() as $name => $association) {
-            $getter = 'get'.Inflector::camelize($name);
+            $getter = 'get'.ucfirst($name);
             $code .= <<<EOF
         if ('$name' == \$name) {
             return \$this->$getter();
@@ -648,7 +648,7 @@ EOF
 
         // columns
         foreach ($this->configClass['columns'] as $name => $columns) {
-            $setter = 'set'.Inflector::camelize($name);
+            $setter = 'set'.ucfirst($name);
             $sets[] = <<<EOF
         if (isset(\$array['$name'])) {
             \$this->$setter(\$array['$name']);
@@ -767,7 +767,7 @@ EOF
     protected function processLoadMetadataMethod()
     {
         $method = new Method('public', 'loadMetadata', '\\Doctrine\\ORM\\Mapping\\ClassMetadata $metadata', implode("\n", $this->loadMetadataCode[$this->class]));
-        $method->setIsStatic(true);
+        $method->setStatic(true);
         $method->setDocComment(<<<EOF
     /**
      * Load the metadata.

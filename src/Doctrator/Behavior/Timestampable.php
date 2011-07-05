@@ -21,9 +21,8 @@
 
 namespace Doctrator\Behavior;
 
-use Mondongo\Mondator\ClassExtension;
-use Mondongo\Mondator\Definition\Method;
-use Mondongo\Inflector;
+use Mandango\Mondator\ClassExtension;
+use Mandango\Mondator\Definition\Method;
 
 /**
  * The doctrator Timestampable behavior.
@@ -40,9 +39,9 @@ class Timestampable extends ClassExtension
     {
         $this->addOptions(array(
             'created_enabled' => true,
-            'created_column'  => 'created_at',
+            'created_column'  => 'createdAt',
             'updated_enabled' => true,
-            'updated_column'  => 'updated_at',
+            'updated_column'  => 'updatedAt',
         ));
     }
 
@@ -81,7 +80,7 @@ class Timestampable extends ClassExtension
             $column = $this->getOption('created_column');
 
             // event
-            $columnSetter = 'set'.Inflector::camelize($column);
+            $columnSetter = 'set'.ucfirst($column);
 
             $method = new Method('public', 'updateTimestampableCreated', '', <<<EOF
         \$this->$columnSetter(new \DateTime());
@@ -99,7 +98,7 @@ EOF
             $column = $this->getOption('updated_column');
 
             // event
-            $columnSetter = 'set'.Inflector::camelize($column);
+            $columnSetter = 'set'.ucfirst($column);
 
             $method = new Method('public', 'updateTimestampableUpdated', '', <<<EOF
         \$this->$columnSetter(new \DateTime());

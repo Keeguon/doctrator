@@ -21,9 +21,8 @@
 
 namespace Doctrator\Behavior;
 
-use Mondongo\Mondator\ClassExtension;
-use Mondongo\Mondator\Definition\Method;
-use Mondongo\Inflector;
+use Mandango\Mondator\ClassExtension;
+use Mandango\Mondator\Definition\Method;
 
 /**
  * The doctrator Sluggable behavior.
@@ -77,8 +76,8 @@ class Sluggable extends ClassExtension
         $slugColumn = $this->getOption('slug_column');
 
         // update slug method
-        $fromColumnGetter = 'get'.Inflector::camelize($fromColumn);
-        $slugColumnSetter = 'set'.Inflector::camelize($slugColumn);
+        $fromColumnGetter = 'get'.ucfirst($fromColumn);
+        $slugColumnSetter = 'set'.ucfirst($slugColumn);
 
         $builder = $this->getOption('builder');
         if (is_array($builder)) {

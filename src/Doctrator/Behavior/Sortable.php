@@ -21,9 +21,8 @@
 
 namespace Doctrator\Behavior;
 
-use Mondongo\Mondator\ClassExtension;
-use Mondongo\Mondator\Definition\Method;
-use Mondongo\Inflector;
+use Mandango\Mondator\ClassExtension;
+use Mandango\Mondator\Definition\Method;
 
 /**
  * The doctrator Sortable behavior.
@@ -73,8 +72,8 @@ class Sortable extends ClassExtension
 
         // position column
         $this->column       = $this->getOption('column');
-        $this->columnSetter = 'set'.Inflector::camelize($this->column);
-        $this->columnGetter = 'get'.Inflector::camelize($this->column);
+        $this->columnSetter = 'set'.ucfirst($this->column);
+        $this->columnGetter = 'get'.ucfirst($this->column);
 
         // methods
         $this->processEntityIsFirstMethod();

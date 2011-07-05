@@ -21,9 +21,8 @@
 
 namespace Doctrator\Behavior;
 
-use Mondongo\Mondator\ClassExtension;
-use Mondongo\Mondator\Definition\Method;
-use Mondongo\Inflector;
+use Mandango\Mondator\ClassExtension;
+use Mandango\Mondator\Definition\Method;
 
 /**
  * The doctrator Hashable behavior.
@@ -64,7 +63,7 @@ class Hashable extends ClassExtension
         $column = $this->getOption('column');
 
         // event
-        $columnSetter = 'set'.Inflector::camelize($column);
+        $columnSetter = 'set'.ucfirst($column);
 
         $method = new Method('public', 'updateHashableHash', '', <<<EOF
         do {

@@ -1,46 +1,42 @@
 <?php
 
-$config = require(__DIR__.'/config.php');
-
-// autoloader
-require($config['mondongo_src_dir'].'/vendor/symfony/src/Symfony/Component/ClassLoader/UniversalClassLoader.php');
+require __DIR__.'/../vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php';
 
 use Symfony\Component\ClassLoader\UniversalClassLoader;
 
 $loader = new UniversalClassLoader();
 $loader->registerNamespaces(array(
-    'Doctrator\\Tests' => __DIR__,
-    'Doctrator'        => __DIR__.'/../src',
-    'Doctrine\\Common' => $config['doctrine_common_lib_dir'],
-    'Doctrine\\DBAL'   => $config['doctrine_dbal_lib_dir'],
-    'Doctrine\\ORM'    => $config['doctrine_orm_lib_dir'],
-    'Model'            => __DIR__,
-    'Mondongo'         => $config['mondongo_src_dir'],
+    'Doctrator\Tests'   => __DIR__,
+    'Doctrator'         => __DIR__.'/../src',
+    'Doctrine\Common'   => __DIR__.'/../vendor/doctrine-common/lib',
+    'Doctrine\DBAL'     => __DIR__.'/../vendor/doctrine-dbal/lib',
+    'Doctrine\ORM'      => __DIR__.'/../vendor/doctrine-orm/lib',
+    'Model'             => __DIR__,
+    'Mandango\Mondator' => __DIR__.'/../vendor/mondator/src',
 ));
 $loader->register();
 
 // mondator
-use \Mondongo\Mondator\Mondator;
-use \Mondongo\Mondator\Output\Output;
+use Mandango\Mondator\Mondator;
 
 $configClasses = array(
     'Model\Article' => array(
         'columns' => array(
-            'id'        => array('id' => 'auto', 'type' => 'integer'),
-            'title'     => array('type' => 'string', 'length' => 100),
-            'slug'      => array('name' => 'title_slug', 'type' => 'string', 'length' => 110, 'unique' => true),
-            'content'   => 'text',
-            'source'    => array('type' => 'string', 'length' => 255, 'nullable' => true),
-            'is_active' => array('type' => 'boolean', 'default' => true),
-            'score'     => array('type' => 'decimal', 'precision' => 2, 'scale' => 4),
-            'date'      => 'date',
+            'id'       => array('id' => 'auto', 'type' => 'integer'),
+            'title'    => array('type' => 'string', 'length' => 100),
+            'slug'     => array('name' => 'titleSlug', 'type' => 'string', 'length' => 110, 'unique' => true),
+            'content'  => 'text',
+            'source'   => array('type' => 'string', 'length' => 255, 'nullable' => true),
+            'isActive' => array('type' => 'boolean', 'default' => true),
+            'score'    => array('type' => 'decimal', 'precision' => 2, 'scale' => 4),
+            'date'     => 'date',
         ),
         'many_to_one' => array(
             'category' => array('class' => 'Model\Category', 'inversed' => 'articles'),
         ),
         'indexes' => array(
-            'my_slug_index'  => array('columns' => array('title_slug'), 'unique' => true),
-            'is_active_date' => array('columns' => array('is_active', 'date')),
+            'my_slug_index'  => array('columns' => array('titleSlug'), 'unique' => true),
+            'isActive_date' => array('columns' => array('isActive', 'date')),
         ),
     ),
     'Model\Category' => array(
@@ -183,11 +179,11 @@ $configClasses = array(
     ),
     'Model\Translatable' => array(
         'columns' => array(
-            'id'        => array('id' => 'auto', 'type' => 'integer'),
-            'title'     => array('type' => 'string', 'length' => 255),
-            'body'      => array('type' => 'text'),
-            'date'      => array('type' => 'datetime'),
-            'is_active' => array('type' => 'boolean', 'default' => true),
+            'id'       => array('id' => 'auto', 'type' => 'integer'),
+            'title'    => array('type' => 'string', 'length' => 255),
+            'body'     => array('type' => 'text'),
+            'date'     => array('type' => 'datetime'),
+            'isActive' => array('type' => 'boolean', 'default' => true),
         ),
         'behaviors' => array(
             array('class' => 'Doctrator\Behavior\Translatable', 'options' => array('columns' => array('title', 'body'))),
