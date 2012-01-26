@@ -427,38 +427,41 @@ EOF
 
             // one_to_one
             if ('one_to_one' == $association['type']) {
-                // inverse
-                if (isset($association['mapped'])) {
+                if (isset($association['mappedBy'])) {
                     $mapping['mappedBy'] = $association['mappedBy'];
-                }
-                // owning
-                else {
-                    if (isset($association['inversed'])) {
-                        $mapping['inversed'] = $association['inversedBy'];
+                } else {
+                    if (isset($association['inversedBy'])) {
+                        $mapping['inversedBy'] = $association['inversedBy'];
+                    }
+                    if (isset($association['joinColumn'])) {
+                        $mapping['joinColumns'] = $association['joinColumn'];
                     }
                 }
             }
             // one_to_many
             if ('one_to_many' == $association['type']) {
-                if (!isset($association['mapped'])) {
-                    throw new \RuntimeException('The association "%s" of the class "%s" is one_to_many and does not have mapped.', $name, $this->class);
+                if (!isset($association['mappedBy'])) {
+                    throw new \RuntimeException('The association "%s" of the class "%s" is one_to_many and does not have mappedBy.', $name, $this->class);
                 }
-                $mapping['mappedBy'] = $association['mapped'];
+                $mapping['mappedBy'] = $association['mappedBy'];
             }
             // many_to_one
             if ('many_to_one' == $association['type']) {
-                if (isset($association['inversed'])) {
-                    $mapping['inversed'] = $association['inversed'];
+                if (isset($association['inversedBy'])) {
+                    $mapping['inversedBy'] = $association['inversedBy'];
                 }
             }
             // many_to_many
             if ('many_to_many' == $association['type']) {
-                if (isset($association['mapped'])) {
-                    $mapping['mapped'] = $association['mapped'];
-                } else if (isset($association['join_table'])) {
-                    if (isset($association['inversed'])) {
-                        $mapping['inversedBy'] = $association['inversed'];
+                if (isset($association['mappedBy'])) {
+                    $mapping['mappedBy'] = $association['mappedBy'];
+                } else {
+                    if (isset($association['inversedBy'])) {
+                        $mapping['inversedBy'] = $association['inversedBy'];
                     }
+                    if (isset($association['joinTable'])) {
+                        $mappind['joinTable'] = $association['joinTable'];
+                    }  
                 }
             }
 
@@ -687,7 +690,7 @@ EOF;
 
         // associations
         foreach ($this->mergeAssociations() as $name => $association) {
-            if (isset($association['mapped'])) {
+            if (isset($association['mappedBy'])) {
                 continue;
             }
 
@@ -742,7 +745,7 @@ EOF
             if (
                 'many_to_many' == $association['type']
                 ||
-                ('one_to_many' == $association['type'] && isset($association['mapped']))
+                ('one_to_many' == $association['type'] && isset($association['mappedBy']))
             ) {
                 $collections[] = <<<EOF
         \$this->$name = new \Doctrine\Common\Collections\ArrayCollection();
