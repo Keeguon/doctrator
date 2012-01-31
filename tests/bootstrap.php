@@ -32,7 +32,7 @@ $configClasses = array(
             'date'     => 'date',
         ),
         'many_to_one' => array(
-            'category' => array('class' => 'Model\Category', 'inversed' => 'articles'),
+            'category' => array('class' => 'Model\Category', 'inversedBy' => 'articles'),
         ),
         'indexes' => array(
             'my_slug_index'  => array('columns' => array('titleSlug'), 'unique' => true),
@@ -45,7 +45,7 @@ $configClasses = array(
             'name' => array('type' => 'string', 'length' => 100)
         ),
         'one_to_many' => array(
-            'articles' => array('class' => 'Model\Article', 'mapped' => 'category'),
+            'articles' => array('class' => 'Model\Article', 'mappedBy' => 'category'),
         ),
     ),
     'Model\Simple' => array(
@@ -64,7 +64,7 @@ $configClasses = array(
             'name' => array('type' => 'string', 'length' => 255),
         ),
         'many_to_one' => array(
-            'school' => array('class' => 'Model\School', 'inversed' => 'students'),
+            'school' => array('class' => 'Model\School', 'inversedBy' => 'students'),
         ),
     ),
     'Model\School' => array(
@@ -72,8 +72,8 @@ $configClasses = array(
             'id'   => array('id' => 'auto', 'type' => 'integer'),
             'name' => array('type' => 'string', 'length' => 255),
         ),
-        'many_to_one' => array(
-            'students' => array('class' => 'Model\Student', 'mapped' => 'school'),
+        'one_to_many' => array(
+            'students' => array('class' => 'Model\Student', 'mappedBy' => 'school'),
         ),
     ),
     /*
@@ -85,7 +85,7 @@ $configClasses = array(
             'name' => array('type' => 'string', 'length' => 255),
         ),
         'many_to_many' => array(
-            'likings' => array('class' => 'Model\Liking', 'inversed' => 'persons'),
+            'likings' => array('class' => 'Model\Liking', 'inversedBy' => 'persons'),
         ),
     ),
     'Model\Liking' => array(
@@ -94,7 +94,7 @@ $configClasses = array(
             'name' => array('type' => 'string', 'length' => 255),
         ),
         'many_to_many' => array(
-            'persons' => array('class' => 'Model\Person', 'mapped' => 'likings'),
+            'persons' => array('class' => 'Model\Person', 'mappedBy' => 'likings'),
         ),
     ),
     /*

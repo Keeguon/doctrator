@@ -441,7 +441,7 @@ EOF
             // one_to_many
             if ('one_to_many' == $association['type']) {
                 if (!isset($association['mappedBy'])) {
-                    throw new \RuntimeException('The association "%s" of the class "%s" is one_to_many and does not have mappedBy.', $name, $this->class);
+                    throw new \RuntimeException(sprintf('The association "%s" of the class "%s" is one_to_many and does not have mappedBy.', $name, $this->class));
                 }
                 $mapping['mappedBy'] = $association['mappedBy'];
             }

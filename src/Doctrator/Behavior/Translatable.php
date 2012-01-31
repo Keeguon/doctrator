@@ -52,7 +52,7 @@ class Translatable extends ClassExtension
                 'locale' => array('type' => 'string', 'length' => 7),
             ),
             'many_to_one' => array(
-                'parent' => array('class' => $this->class, 'inversed' => 'translations'),
+                'parent' => array('class' => $this->class, 'inversedBy' => 'translations'),
             ),
         );
 
@@ -72,7 +72,7 @@ class Translatable extends ClassExtension
         // relation
         $this->configClass['one_to_many']['translations'] = array(
             'class'  => $this->class.'Translation',
-            'mapped' => 'parent',
+            'mappedBy' => 'parent',
         );
     }
 
