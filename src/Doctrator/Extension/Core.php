@@ -450,6 +450,9 @@ EOF
                 if (isset($association['inversedBy'])) {
                     $mapping['inversedBy'] = $association['inversedBy'];
                 }
+                if (isset($association['joinColumn'])) {
+                    $mapping['joinColumns'] = $association['joinColumn'];
+                }
             }
             // many_to_many
             if ('many_to_many' == $association['type']) {
