@@ -434,7 +434,7 @@ EOF
                         $mapping['inversedBy'] = $association['inversedBy'];
                     }
                     if (isset($association['joinColumn'])) {
-                        $mapping['joinColumns'] = $association['joinColumn'];
+                        $mapping['joinColumns'][] = $association['joinColumn'];
                     }
                 }
             }
@@ -451,7 +451,7 @@ EOF
                     $mapping['inversedBy'] = $association['inversedBy'];
                 }
                 if (isset($association['joinColumn'])) {
-                    $mapping['joinColumns'] = $association['joinColumn'];
+                    $mapping['joinColumns'][] = $association['joinColumn'];
                 }
             }
             // many_to_many
