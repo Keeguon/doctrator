@@ -418,7 +418,7 @@ EOF
             $mapping = array(
                 'fieldName'    => $name,
                 'targetEntity' => $association['class'],
-                'cascade'      => isset($assocition['cascade']) ? $association['cascade'] : array('persist', 'remove'),
+                'cascade'      => isset($association['cascade']) ? $association['cascade'] : array('persist', 'remove'),
             );
 
             if (isset($association['fetch'])) {
