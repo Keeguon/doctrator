@@ -21,8 +21,8 @@
 
 namespace Doctrator\Driver;
 
-use Doctrine\ORM\Mapping\Driver\StaticPHPDriver;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
+use Doctrine\Common\Persistence\Mapping\Driver\StaticPHPDriver;
+use Doctrine\Common\Persistence\Mapping\ClassMetadataInfo;
 
 /**
  * The doctrator driver.
