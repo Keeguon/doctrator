@@ -22,7 +22,7 @@
 namespace Doctrator\Driver;
 
 use Doctrine\Common\Persistence\Mapping\Driver\StaticPHPDriver;
-use Doctrine\Common\Persistence\Mapping\ClassMetadataInfo;
+use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 
 /**
  * The doctrator driver.
@@ -39,7 +39,7 @@ class DoctratorDriver extends StaticPHPDriver
     /**
      * {@inheritdoc}
      */
-    public function loadMetadataForClass($className, ClassMetadataInfo $metadata)
+    public function loadMetadataForClass($className, ClassMetadata $metadata)
     {
         if (false !== stripos($className, 'Base')) {
             $metadata->isMappedSuperclass = true;
