@@ -343,7 +343,7 @@ EOF
     {
         $method = new Method('public', 'getTags', '', <<<EOF
         \$tagIds = array();
-        foreach (\$this->getEntityManager()->createQuery('SELECT DISTINCT(t.tag_id) FROM {$this->class}Tagging t')->getArrayResult() as \$result) {
+        foreach (\$this->getEntityManager()->createQuery('SELECT DISTINCT(t.tag_id) AS tag_id FROM {$this->class}Tagging t')->getArrayResult() as \$result) {
             \$tagIds[] = \$result['tag_id'];
         }
 

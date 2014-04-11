@@ -40,7 +40,7 @@ class Inflector
      */
     static public function camelize($string)
     {
-        return preg_replace(array('/(^|_)+(.)/e', '/\.(.)/e'), array("strtoupper('\\2')", "'_'.strtoupper('\\1')"), $string);
+        return strtr(ucwords(strtr($string, array('_' => ' ', '.' => '_ ', '\\' => '_ '))), array(' ' => ''));
     }
 
     /**

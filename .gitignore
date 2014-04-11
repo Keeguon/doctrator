@@ -1,4 +1,16 @@
+# Mac files
+.DS_Store
+*.sw[a-z]
+
+# Ignore potentially sensitive phpunit file
 phpunit.xml
-tests/config.php
+
+# Ignore composer generated files
+composer.phar
+composer.lock
+composer-test.lock
+vendor/
+
+# Other dirs & files
 tests/Model/Base
 tests/ModelNotAR/Base

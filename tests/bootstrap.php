@@ -1,20 +1,8 @@
 <?php
 
-require __DIR__.'/../vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php';
-
-use Symfony\Component\ClassLoader\UniversalClassLoader;
-
-$loader = new UniversalClassLoader();
-$loader->registerNamespaces(array(
-    'Doctrator\Tests'   => __DIR__,
-    'Doctrator'         => __DIR__.'/../src',
-    'Doctrine\Common'   => __DIR__.'/../vendor/doctrine-common/lib',
-    'Doctrine\DBAL'     => __DIR__.'/../vendor/doctrine-dbal/lib',
-    'Doctrine\ORM'      => __DIR__.'/../vendor/doctrine-orm/lib',
-    'Model'             => __DIR__,
-    'Mandango\Mondator' => __DIR__.'/../vendor/mondator/src',
-));
-$loader->register();
+$loader = require __DIR__."/../vendor/autoload.php";
+$loader->add('Doctrator\Tests', __DIR__);
+$loader->add('Model', __DIR__);
 
 // mondator
 use Mandango\Mondator\Mondator;
