@@ -4,7 +4,7 @@
   "description": "An ActiveRecord implementation (or not) with real and flexible behaviors for Doctrine2.",
   "keywords": ["doctrator", "activerecord", "doctrine", "doctrine2"],
   "homepage": "https://github.com/Keeguon/doctrator",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "authors": [
     {
@@ -14,7 +14,7 @@
     }
   ],
   "require": {
-    "php": ">= 5.4",
+    "php": ">= 5.3",
     "doctrine/orm": "~2.3",
     "mandango/mondator": "1.0.*@dev"
   },
