@@ -4,7 +4,7 @@
   "description": "An ActiveRecord implementation (or not) with real and flexible behaviors for Doctrine2.",
   "keywords": ["doctrator", "activerecord", "doctrine", "doctrine2"],
   "homepage": "https://github.com/Keeguon/doctrator",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": "MIT",
   "authors": [
     {

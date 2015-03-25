@@ -53,14 +53,14 @@ class ArrayAccess extends Extension
     protected function processOffsetExistsMethod()
     {
         $method = new Method('public', 'offsetExists', '$name', <<<EOF
-        throw new \LogicException('You cannot check if data exists in the entity.');
+        return property_exists("{$this->definitions['entity_base']}", $name);
 EOF
         );
         $method->setDocComment(<<<EOF
     /**
-     * Throws an \LogicException because you cannot check if data exists.
+     * Checks if the object or class has a property
      *
-     * @throws \LogicException
+     * @return boolean
      */
 EOF
         );
