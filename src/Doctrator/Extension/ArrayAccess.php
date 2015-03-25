@@ -53,7 +53,7 @@ class ArrayAccess extends Extension
     protected function processOffsetExistsMethod()
     {
         $method = new Method('public', 'offsetExists', '$name', <<<EOF
-        return property_exists("{$this->definitions['entity_base']}", $name);
+        return property_exists("{$this->definitions['entity_base']->getClass()}", \$name);
 EOF
         );
         $method->setDocComment(<<<EOF
