@@ -13,13 +13,13 @@
 >
     <testsuites>
         <testsuite name="Doctrator Test Suite">
-          <directory>./tests/Doctrator/</directory>
+          <directory>tests/Doctrator/</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory>./src</directory>
+            <directory suffix=".php">src/Doctrator/</directory>
         </whitelist>
     </filter>
 </phpunit>

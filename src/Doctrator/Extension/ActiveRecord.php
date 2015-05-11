@@ -89,7 +89,7 @@ EOF
         \$unitOfWork = static::entityManager()->getUnitOfWork();
 
         if (null === \$reflection) {
-            \$reflection = new \ReflectionProperty(get_class(\$unitOfWork), 'scheduledForDirtyCheck');
+            \$reflection = new \ReflectionProperty(get_class(\$unitOfWork), 'scheduledForSynchronization');
             \$reflection->setAccessible(true);
         }
 

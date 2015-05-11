@@ -25,13 +25,10 @@ use Model\Article;
 
 class ArrayAccessTest extends \Doctrator\Tests\TestCase
 {
-    /**
-     * @expectedException \LogicException
-     */
     public function testOffsetExists()
     {
         $article = new Article();
-        isset($article['title']);
+        $this->assertTrue(isset($article['title']));
     }
 
     public function testOffsetSet()

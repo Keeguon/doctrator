@@ -1,7 +1,6 @@
 <?php
 
-$loader = require __DIR__."/../vendor/autoload.php";
-$loader->add('Doctrator\Tests', __DIR__);
+$loader = require __DIR__ . "/../vendor/autoload.php";
 $loader->add('Model', __DIR__);
 
 // mondator
